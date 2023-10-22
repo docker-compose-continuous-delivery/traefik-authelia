@@ -5,7 +5,8 @@
 default_redirection_url: https://ozeliurs.com
 
 server:
-  address: 'tcp://:9091'
+  listen_address: 0.0.0.0
+  listen_port: 9091
 
 log:
   level: debug
