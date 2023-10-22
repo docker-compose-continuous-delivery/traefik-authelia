@@ -1,0 +1,12 @@
+name: Authelia Configuration Validation
+
+on: [ push ]
+
+jobs:
+  authelia:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Validate Authelia Configuration
+        run: docker run --rm -v $PWD/authelia/configuration.yml:/config/configuration.yml authelia/authelia:latest authelia validate-config --config /config/configuration.yml

@@ -1,0 +1,19 @@
+name: Traefik Configuration Validation
+
+on: [ push ]
+
+jobs:
+  traefik:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Validate Traefik Configuration
+        # use go env
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+      - name: Validate Traefik Configuration
+        run: |
+          go get github.com/thomasklinger1234/traefik-config-validator
+          traefik-config-validator -cfg traefik/traefik.yml
