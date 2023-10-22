@@ -23,8 +23,7 @@ access_control:
     - domain: traefik.ozeliurs.com
       policy: two_factor
       subject:
-        groups:
-          - admins
+        - "group:admins"
 
 session:
   domain: ozeliurs.com

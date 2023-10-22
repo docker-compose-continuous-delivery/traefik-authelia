@@ -5,8 +5,6 @@
 !*.secret
 
 # git-secret-encrypted
-
-hello-world/.env
 traefik/.env
 authelia/secrets/JWT_SECRET
 authelia/secrets/SESSION_SECRET
