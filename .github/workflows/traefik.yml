@@ -15,5 +15,5 @@ jobs:
           go-version: 1.16
       - name: Validate Traefik Configuration
         run: |
-          go get github.com/thomasklinger1234/traefik-config-validator
+          go get github.com/otto-de/traefik-config-validator
           traefik-config-validator -cfg traefik/traefik.yml
