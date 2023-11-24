@@ -31,7 +31,7 @@ Finally, commit and push the changes to the repository.
 
 To add automatic update of the confirguration contained in this repository, you can add the following to your crontab (run `crontab -e` to edit your crontab):
 
-```bash
+```crontab
 # Update configuration
 * * * * * bash /path/to/this/repository/.scripts/fetch-and-update.sh
 ```
