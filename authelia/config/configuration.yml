@@ -39,8 +39,10 @@ storage:
     path: /config/db.sqlite3
 
 notifier:
-  smtp:
-    username: notify@ozeliurs.com
-    host: smtp.mail.me.com
-    port: 587
-    sender: notify@ozeliurs.com
+  filesystem:
+    filename: /config/notification-queue.yml
+  #smtp:
+  #  username: notify@ozeliurs.com
+  #  host: smtp.mail.me.com
+  #  port: 587
+  #  sender: notify@ozeliurs.com
