@@ -32,11 +32,6 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=cloudflare"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.middlewares=authelia@docker"
-    healthcheck:
-      test: [ "CMD", "traefik" ,"healthcheck" ]
-      interval: 30s
-      timeout: 3s
-      retries: 30
 
   authelia:
     image: authelia/authelia:latest
@@ -71,9 +66,6 @@ services:
       - 'traefik.http.middlewares.authelia-basic.forwardAuth.address=http://authelia:9091/api/verify?auth=basic'
       - 'traefik.http.middlewares.authelia-basic.forwardAuth.trustForwardHeader=true'
       - 'traefik.http.middlewares.authelia-basic.forwardAuth.authResponseHeaders=Remote-User,Remote-Groups,Remote-Name,Remote-Email'
-    depends_on:
-      traefik:
-        condition: service_healthy
 
 networks:
   traefik:
