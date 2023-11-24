@@ -26,4 +26,4 @@ git secret reveal -f
 
 # Run the on-update.sh script
 echo "Running on-update.sh"
-bash on-update.sh
+bash .on-update.sh

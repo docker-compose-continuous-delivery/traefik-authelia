@@ -1,0 +1,73 @@
+version: "3.9"
+
+services:
+
+  traefik:
+    image: "traefik:latest"
+    container_name: "traefik"
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./traefik/letsencrypt:/letsencrypt"
+      - "./traefik/logs:/var/log/traefik"
+      - "./traefik/traefik.yml:/etc/traefik/traefik.yml:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - traefik
+    env_file:
+      - .env_traefik
+    labels:
+      - "traefik.enable=true"
+      # Wildcard certificate
+      - "traefik.http.routers.wildcard.tls.domains[0].main=${BASE_DOMAIN}"
+      - "traefik.http.routers.wildcard.tls.domains[0].sans=*.${BASE_DOMAIN}"
+      - "traefik.http.routers.wildcard.tls.certResolver=cloudflare"
+
+      # Traefik dashboard
+      - "traefik.http.routers.traefik.rule=Host(`traefik.${BASE_DOMAIN}`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.certresolver=cloudflare"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.middlewares=authelia@docker"
+
+  authelia:
+    image: authelia/authelia:latest
+    container_name: authelia
+    restart: unless-stopped
+    environment:
+      - JWT_SECRET_FILE=/run/secrets/JWT_SECRET
+      - SESSION_SECRET_FILE=/run/secrets/SESSION_SECRET
+      - AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/run/secrets/AUTHELIA_STORAGE_ENCRYPTION_KEY
+      - AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE=/run/secrets/AUTHELIA_NOTIFIER_SMTP_PASSWORD
+    volumes:
+      - "./authelia/configuration.yml:/config/configuration.yml:ro"
+      - "./authelia/users_database.yml:/config/users_database.yml"
+      - "./authelia/secrets:/run/secrets:ro"
+      - "./authelia/db.sqlite3:/config/db.sqlite3"
+      - "/etc/localtime:/etc/localtime:ro"
+    ports:
+      - "9091:9091"
+    networks:
+      - traefik
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.authelia.rule=Host(`authelia.${BASE_DOMAIN}`)'
+      - 'traefik.http.routers.authelia.entryPoints=websecure'
+      - 'traefik.http.routers.authelia.tls=true'
+      - 'traefik.http.routers.authelia.tls.certresolver=cloudflare'
+      - 'traefik.http.middlewares.authelia.forwardAuth.address=http://authelia:9091/api/verify?rd=https://authelia.${BASE_DOMAIN}/'
+      - 'traefik.http.middlewares.authelia.forwardAuth.trustForwardHeader=true'
+      - 'traefik.http.middlewares.authelia.forwardAuth.authResponseHeaders=Remote-User,Remote-Groups,Remote-Name,Remote-Email'
+      - 'traefik.http.middlewares.authelia-basic.forwardAuth.address=http://authelia:9091/api/verify?auth=basic'
+      - 'traefik.http.middlewares.authelia-basic.forwardAuth.trustForwardHeader=true'
+      - 'traefik.http.middlewares.authelia-basic.forwardAuth.authResponseHeaders=Remote-User,Remote-Groups,Remote-Name,Remote-Email'
+    depends_on:
+      traefik:
+        condition: service_healthy
+
+networks:
+  traefik:
+    external: true
