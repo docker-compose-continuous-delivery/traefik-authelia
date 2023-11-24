@@ -45,10 +45,8 @@ services:
     env_file:
       - .env_authelia
     volumes:
-      - "./authelia/configuration.yml:/config/configuration.yml:ro"
-      - "./authelia/users_database.yml:/config/users_database.yml"
+      - "./authelia/config:/config"
       - "./authelia/secrets:/run/secrets:ro"
-      - "./authelia/db.sqlite3:/config/db.sqlite3"
       - "/etc/localtime:/etc/localtime:ro"
     ports:
       - "9091:9091"

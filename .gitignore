@@ -18,3 +18,4 @@ authelia/secrets/STORAGE_ENCRYPTION_KEY
 authelia/secrets/JWT_SECRET
 authelia/secrets/SESSION_SECRET
 authelia/users_database.yml
+authelia/config/users_database.yml
