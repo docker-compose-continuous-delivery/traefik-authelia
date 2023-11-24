@@ -13,7 +13,7 @@ traefik/authelia/secrets/AUTHELIA_NOTIFIER_SMTP_PASSWORD
 traefik/authelia/secrets/AUTHELIA_STORAGE_ENCRYPTION_KEY
 .env_traefik
 .env_authelia
-authelia/secrets/AUTHELIA_NOTIFIER_SMTP_PASSWORD
+authelia/secrets/NOTIFIER_SMTP_PASSWORD
 authelia/secrets/STORAGE_ENCRYPTION_KEY
 authelia/secrets/JWT_SECRET
 authelia/secrets/SESSION_SECRET
