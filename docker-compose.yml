@@ -32,6 +32,11 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=cloudflare"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.middlewares=authelia@docker"
+    healthcheck:
+      test: [ "CMD", "traefik", "healthcheck" ]
+      interval: 5s
+      timeout: 2s
+      retries: 3
 
   authelia:
     image: authelia/authelia:latest
