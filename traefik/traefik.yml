@@ -21,6 +21,11 @@ api:
   dashboard: true  # false for production or dont expose port for production
   insecure: false  # false for production
 
+# Enable ping
+# ---
+ping: {}
+
+
 metrics:
   prometheus:
     entryPoint: traefik
