@@ -6,13 +6,26 @@ If your server does not have a gpg key, you have to generate one. You can do so 
 gpg --gen-key
 ```
 
-Then enroll the key to the git-secret tool by running the following command:
+Then import the key to your local gpg keychain by running the following command:
 
+On the server:
+```bash
+gpg --export-secret-keys --armor <email-of-the-server> > <path-to-the-key>
+```
+
+Then copy the key to your local machine and import it by running the following command:
+```bash
+gpg --import <path-to-the-key>
+```
+
+Then enroll the key to the git-secret tool by running the following command:
 ```bash
 git secret tell <email-of-the-server>
 git secret reveal
 git secret hide -d
 ```
+
+Finally, commit and push the changes to the repository.
 
 ## Automating updates
 
