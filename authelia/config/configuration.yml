@@ -42,4 +42,5 @@ notifier:
   smtp:
     host: in-v3.mailjet.com
     port: 587
+    sender: authelia@ozeliurs.com
     username: de381576caab290d3870433daa7372a8
