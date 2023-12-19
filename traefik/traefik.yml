@@ -28,7 +28,7 @@ ping: {}
 
 metrics:
   prometheus:
-    entryPoint: traefik
+    entryPoint: metrics
     buckets:
       - 0.1
       - 0.3
