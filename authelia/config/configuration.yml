@@ -101,6 +101,11 @@ access_control:
 session:
   # secret: 'insecure_session_secret' ## set by AUTHELIA_SESSION_SECRET_FILE
 
+  cookies:
+    -
+      domain: 'ozeliurs.com'
+
+
   name: 'authelia_session'
   same_site: 'lax'
   inactivity: '5m'
