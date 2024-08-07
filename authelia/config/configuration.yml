@@ -158,7 +158,6 @@ notifier:
   ##   - validate the SMTP server x509 certificate during the TLS handshake against the hosts trusted certificates
   ##     (configure in tls section)
   smtp:
-    host: in-v3.mailjet.com
-    port: 587
-    sender: authelia@ozeliurs.com
-    username: de381576caab290d3870433daa7372a8
+    address: 'smtp://in-v3.mailjet.com:587'
+    sender: 'Authelia <authelia@ozeliurs.com>'
+    username: 'de381576caab290d3870433daa7372a8'
