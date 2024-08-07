@@ -103,7 +103,6 @@ session:
 
   cookies:
     -
-      domain: 'ozeliurs.com'
 
 
   name: 'authelia_session'
