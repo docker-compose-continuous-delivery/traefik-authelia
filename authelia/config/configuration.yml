@@ -101,15 +101,13 @@ access_control:
 session:
   # secret: 'insecure_session_secret' ## set by AUTHELIA_SESSION_SECRET_FILE
 
+  ## Cookies configures the list of allowed cookie domains for sessions to be created on.
+  ## Undefined values will default to the values below.
   cookies:
     -
-
-
-  name: 'authelia_session'
-  same_site: 'lax'
-  inactivity: '5m'
-  expiration: '1h'
-  remember_me: '1M'
+      name: 'authelia_session'
+      domain: 'ozeliurs.com'
+      authelia_url: 'https://authelia.ozeliurs.com'
 
 ##
 ## Regulation Configuration
