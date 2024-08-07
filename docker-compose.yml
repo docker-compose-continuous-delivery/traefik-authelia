@@ -41,7 +41,7 @@ services:
       retries: 3
 
   authelia:
-    image: authelia/authelia:latest
+    image: authelia/authelia:4.38
     container_name: authelia
     restart: unless-stopped
     environment:
