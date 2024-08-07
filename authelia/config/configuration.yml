@@ -114,8 +114,8 @@ session:
 ## in a short period of time.
 regulation:
   max_retries: 3
-  find_time: '2 minutes'
-  ban_time: '5 minutes'
+  find_time: '2m'
+  ban_time: '5m'
 
 ##
 ## Storage Provider Configuration
